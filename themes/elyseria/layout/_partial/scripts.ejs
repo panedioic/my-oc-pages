@@ -1,0 +1,29 @@
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+<!-- 主题自定义脚本 -->
+<script src="<%- url_for('/js/main.js') %>"></script>
+
+<% if (theme.google_analytics) { %>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%- theme.google_analytics %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<%- theme.google_analytics %>');
+</script>
+<% } %>
+
+<% if (theme.baidu_analytics) { %>
+<!-- Baidu Analytics -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?<%- theme.baidu_analytics %>";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<% } %> 

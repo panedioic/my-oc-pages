@@ -1,0 +1,913 @@
+// Variables
+$theme-color = convert(hexo-config('theme_color'))
+$text-color = #333
+$link-color = $theme-color
+$background-color = #fff
+
+// Base
+body
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  line-height: 1.6
+  color: $text-color
+  background: $background-color
+  margin: 0
+  padding: 0
+  min-height: 100vh
+  overflow-x: hidden
+
+a
+  color: $link-color
+  text-decoration: none
+  transition: color 0.3s ease
+  &:hover
+    color: darken($link-color, 10%)
+
+// Container
+.container
+  width: 100%
+  margin: 0 auto
+  padding: 0
+
+// Header
+.header
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  z-index: 1000
+  background: rgba(255, 255, 255, 0.8)
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)
+  backdrop-filter: blur(8px)
+  height: 60px
+  display: flex
+  align-items: center
+  justify-content: center
+  
+  .header-inner
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 2rem
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    @media (min-width: 1200px)
+      width: 1200px
+  
+  .site-brand
+    .brand
+      font-size: 1.3rem
+      font-weight: bold
+      
+    img
+      height: 72px
+      
+  .nav
+    .menu
+      display: flex
+      list-style: none
+      margin: 0
+      padding: 0
+      
+      .menu-item
+        margin-left: 1.5rem
+        
+        .menu-link
+          color: $text-color
+          font-weight: 500
+          font-size: 0.95rem
+          padding: 0.5rem 0
+          position: relative
+          
+          &:after
+            content: ''
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 0
+            height: 2px
+            background: $theme-color
+            transition: width 0.3s ease
+          
+          &:hover
+            color: $theme-color
+            &:after
+              width: 100%
+
+// Hero Section
+.hero-section
+  position: relative
+  min-height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+  text-align: center
+  background: url(convert(hexo-config('hero.background_image'))) center/cover fixed no-repeat
+  margin-bottom: 0
+  padding-top: 60px
+  
+  &:after
+    display: none
+  
+  .hero-overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.5)
+    
+  .hero-content
+    position: relative
+    z-index: 1
+    color: white
+    padding: 2rem
+    max-width: 1200px
+    margin: 0 auto
+    
+    .site-title
+      font-size: 4rem
+      margin: 0 0 1rem
+      color: convert(hexo-config('hero.title_color'))
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3)
+      
+    .site-description
+      font-size: 1.5rem
+      margin: 0
+      color: convert(hexo-config('hero.desc_color'))
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+
+// Feature Cards
+.feature-cards
+  max-width: 1200px
+  margin: 3rem auto
+  padding: 0 1rem
+  position: relative
+  z-index: 2
+  background: $background-color
+  
+  .card-container
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 2rem
+    
+  .feature-card
+    background: white
+    padding: 2.5rem 2rem
+    border-radius: 12px
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1)
+    text-align: center
+    cursor: pointer
+    transition: all 0.3s ease
+    
+    &:hover
+      transform: translateY(-8px)
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15)
+    
+    .card-icon
+      font-size: 3.5rem
+      margin-bottom: 1.5rem
+      
+    h3
+      margin: 0 0 0.8rem
+      color: $text-color
+      font-size: 1.4rem
+      
+    p
+      margin: 0
+      color: #666
+      font-size: 1rem
+
+// Recent Posts
+.recent-posts
+  max-width: 1200px
+  margin: 0 auto
+  padding: 3rem 1rem
+  
+  .section-title
+    text-align: center
+    margin-bottom: 3rem
+    font-size: 2rem
+    
+  .post-list
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    gap: 2rem
+
+// Footer
+.footer
+  background: #f8f9fa
+  padding: 2rem 0
+  margin-top: 0
+  
+  .footer-inner
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 1rem
+    text-align: center
+    
+    .copyright
+      margin-bottom: 1rem
+      color: #666
+      
+      a
+        color: $theme-color
+        &:hover
+          text-decoration: underline
+    
+    .beian
+      font-size: 0.9rem
+      color: #666
+      margin-top: 1rem
+      
+      a
+        color: #666
+        text-decoration: none
+        transition: color 0.3s ease
+        
+        &:hover
+          color: $theme-color
+      
+      img
+        height: 14px
+        margin-right: 4px
+        vertical-align: middle
+        margin-top: -2px
+      
+      span
+        margin: 0 0.5rem
+
+// About Page
+.about-wrapper
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  background: #f5f5f5
+
+.about-page
+  flex: 1
+  padding: 0
+  
+  .about-header
+    width: 100vw
+    margin-bottom: 2rem
+    position: relative
+    left: 50%
+    right: 50%
+    margin-left: -50vw
+    margin-right: -50vw
+    
+    .header-image
+      position: relative
+      height: 300px
+      background-size: 100% auto
+      display: flex
+      align-items: center
+      justify-content: center
+      
+      .header-overlay
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        background: rgba(0, 0, 0, 0.2)
+        
+      h1
+        position: relative
+        color: white
+        font-size: 3rem
+        font-weight: 700
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3)
+        margin: 0
+        z-index: 1
+  
+  .about-container
+    max-width: 1000px
+    margin: 0 auto
+    padding: 0
+    
+  .about-card
+    background: rgba(255, 255, 255, 0.95)
+    border-radius: 15px
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1)
+    margin: 2rem 2rem
+    padding: 3rem
+    backdrop-filter: blur(10px)
+    
+    .post-copyright
+      margin-top: 2rem
+      padding-top: 1rem
+      border-top: 1px solid rgba(0, 0, 0, 0.1)
+    
+  .about-content
+    h1
+      display: none
+      
+    h2
+      font-size: 1.8rem
+      margin: 2rem 0 1.5rem
+      color: $text-color
+      border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+      padding-bottom: 0.8rem
+      font-weight: 600
+      
+      &:first-of-type
+        margin-top: 0
+      
+    p
+      font-size: 1.1rem
+      line-height: 1.8
+      margin: 1.2rem 0
+      color: #333
+      
+    a
+      color: $theme-color
+      text-decoration: none
+      border-bottom: 2px solid transparent
+      transition: all 0.3s ease
+      font-weight: 500
+      
+      &:hover
+        border-bottom-color: $theme-color
+        
+    hr
+      border: none
+      border-top: 1px solid rgba(0, 0, 0, 0.1)
+      margin: 2.5rem 0
+      
+    strong
+      color: #222
+      font-weight: 600
+      
+    em
+      color: #666
+      font-style: italic
+      
+    ol, ul
+      padding-left: 1.5rem
+      margin: 1rem 0
+      
+      li
+        margin: 0.5rem 0
+        line-height: 1.6
+
+// Responsive styles for about page
+@media (max-width: 768px)
+  .about-page
+    .about-header
+      .header-image
+        height: 200px
+        
+        h1
+          font-size: 2.5rem
+          
+    .about-card
+      margin: 0 1rem
+      padding: 2rem
+      
+    .about-content
+      h2
+        font-size: 1.6rem
+        
+      p
+        font-size: 1rem
+
+// Responsive
+@media (max-width: 768px)
+  .hero-section
+    height: 80vh
+    margin-bottom: 100px
+    
+    .hero-content
+      .site-title
+        font-size: 2.5rem
+      .site-description
+        font-size: 1.2rem
+        
+  .feature-cards
+    .card-container
+      grid-template-columns: 1fr
+      
+  .header
+    .nav
+      display: none
+      
+    .mobile-menu-toggle
+      display: block 
+
+// Character Page
+.character-page
+  min-height: 100vh
+  padding: 80px 0 2rem
+  background: #f5f5f5
+
+  .character-container
+    max-width: 1200px
+    margin: 0 auto
+    display: flex
+    gap: 2rem
+    padding: 0 1rem
+
+  // 左侧角色列表
+  .character-list
+    flex: 0 0 250px
+    background: rgba(255, 255, 255, 0.95)
+    border-radius: 15px
+    padding: 1.5rem
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    height: fit-content
+    position: sticky
+    top: 80px
+
+    .list-title
+      font-size: 1.5rem
+      margin-bottom: 1rem
+      padding-bottom: 0.5rem
+      border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+      color: $text-color
+
+    .character-nav
+      list-style: none
+      padding: 0
+      margin: 0
+
+      .character-item
+        margin: 0.5rem 0
+
+        a
+          display: block
+          padding: 0.8rem 1rem
+          color: $text-color
+          text-decoration: none
+          border-radius: 8px
+          transition: all 0.3s ease
+
+          &:hover
+            background: rgba(108, 92, 231, 0.1)
+            color: $theme-color
+
+        &.active a
+          background: $theme-color
+          color: white
+
+  // 右侧角色信息
+  .character-content
+    flex: 1
+    background: rgba(255, 255, 255, 0.95)
+    border-radius: 15px
+    padding: 2rem
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+
+    .character-header
+      margin-bottom: 2rem
+      
+      .character-title
+        font-size: 2rem
+        color: $text-color
+        margin: 0
+        padding-bottom: 1rem
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+
+    .character-info
+      display: flex
+      gap: 2rem
+      margin-bottom: 2rem
+
+      .character-image
+        flex: 0 0 300px
+        height: 400px
+        background: #f0f0f0
+        border-radius: 10px
+        overflow: hidden
+
+        img
+          width: 100%
+          height: 100%
+          object-fit: cover
+
+        .image-placeholder
+          width: 100%
+          height: 100%
+          display: flex
+          align-items: center
+          justify-content: center
+          color: #999
+          font-size: 1.2rem
+
+      .character-profile
+        flex: 1
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 1rem
+        align-content: start
+
+        .profile-item
+          display: flex
+          flex-direction: column
+          padding: 0.8rem
+          background: rgba(0, 0, 0, 0.03)
+          border-radius: 8px
+
+          &.note-item
+            grid-column: 1 / -1
+            background: rgba(255, 236, 179, 0.3)
+            order: 999
+            margin-top: 1rem
+
+          .item-label
+            font-size: 0.9rem
+            color: #666
+            margin-bottom: 0.3rem
+            text-transform: capitalize
+
+          .item-value
+            font-size: 1.2rem
+            color: $text-color
+            font-weight: 500
+
+    .character-details
+      h2
+        font-size: 1.5rem
+        color: $text-color
+        margin: 2rem 0 1rem
+        padding-bottom: 0.5rem
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+
+        &:first-child
+          margin-top: 0
+
+      h3
+        font-size: 1.2rem
+        color: $text-color
+        margin: 1.5rem 0 0.5rem
+
+      p
+        margin: 0.8rem 0
+        line-height: 1.6
+        color: #333
+
+      ul
+        padding-left: 1.5rem
+        margin: 1rem 0
+
+        li
+          margin: 0.3rem 0
+
+    // 人际关系卡片
+    .character-relations, .character-stories
+      margin-top: 2rem
+
+      h2
+        font-size: 1.5rem
+        color: $text-color
+        margin-bottom: 1rem
+        padding-bottom: 0.5rem
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+
+      .relation-cards, .story-cards
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+        gap: 1rem
+
+    .relation-card, .story-card
+      background: white
+      border-radius: 10px
+      padding: 1.5rem
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+      text-decoration: none
+      transition: all 0.3s ease
+
+      &:hover
+        transform: translateY(-3px)
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+
+      h3
+        font-size: 1.2rem
+        color: $text-color
+        margin: 0 0 0.5rem
+
+      .relation-role
+        font-size: 0.9rem
+        color: $theme-color
+        margin-bottom: 0.8rem
+
+      p
+        font-size: 1rem
+        color: #666
+        margin: 0
+        line-height: 1.5
+
+    // 欢迎页面
+    .welcome-section
+      text-align: center
+      padding: 2rem 0
+
+      h1
+        font-size: 2rem
+        color: $text-color
+        margin-bottom: 1rem
+
+      p
+        color: #666
+        margin-bottom: 2rem
+
+      .character-grid
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+        gap: 2rem
+
+        .character-card
+          background: white
+          border-radius: 15px
+          overflow: hidden
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+          text-decoration: none
+          transition: all 0.3s ease
+
+          &:hover
+            transform: translateY(-5px)
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1)
+
+          .card-image
+            height: 300px
+            background: #f0f0f0
+            overflow: hidden
+
+            img
+              width: 100%
+              height: 100%
+              object-fit: cover
+
+            .image-placeholder
+              width: 100%
+              height: 100%
+              display: flex
+              align-items: center
+              justify-content: center
+              color: #999
+              font-size: 1.2rem
+
+          h3
+            font-size: 1.3rem
+            color: $text-color
+            margin: 1rem
+            padding: 0
+
+          p
+            color: #666
+            margin: 0 1rem 1rem
+            font-size: 0.9rem
+
+// Responsive styles for character page
+@media (max-width: 768px)
+  .character-page
+    padding-top: 60px
+    
+    .character-container
+      flex-direction: column
+      
+    .character-list
+      flex: none
+      width: 100%
+      position: static
+      
+    .character-content
+      .character-info
+        flex-direction: column
+        
+        .character-image
+          flex: none
+          height: 300px
+          
+        .character-profile
+          grid-template-columns: 1fr
+
+      .relation-cards, .story-cards
+        grid-template-columns: 1fr
+
+// Story Page Styles
+.story-page
+  min-height: 100vh
+  padding: 80px 0 2rem
+  background: #f5f5f5
+
+  .story-container
+    max-width: 1200px
+    margin: 0 auto
+    display: flex
+    gap: 2rem
+    padding: 0 1rem
+
+  // 左侧导航栏
+  .story-sidebar
+    flex: 0 0 250px
+    background: rgba(255, 255, 255, 0.95)
+    border-radius: 15px
+    padding: 1.5rem
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    height: fit-content
+    position: sticky
+    top: 80px
+
+    .book-list
+      .book-item
+        margin-bottom: 1rem
+
+        .book-title
+          font-size: 1.1rem
+          padding: 0.8rem
+          background: rgba(0, 0, 0, 0.03)
+          border-radius: 8px
+          cursor: pointer
+          display: flex
+          justify-content: space-between
+          align-items: center
+          transition: all 0.3s ease
+
+          &:hover
+            background: rgba(108, 92, 231, 0.1)
+
+          &.open
+            background: $theme-color
+            color: white
+
+            .toggle-icon
+              transform: rotate(90deg)
+
+          .toggle-icon
+            width: 0
+            height: 0
+            border-top: 6px solid transparent
+            border-bottom: 6px solid transparent
+            border-left: 8px solid currentColor
+            transition: transform 0.3s ease
+
+        .chapter-list
+          display: none
+          padding-left: 1rem
+          margin-top: 0.5rem
+
+          &.show
+            display: block
+
+          .chapter-item
+            display: block
+            padding: 0.5rem 1rem
+            color: $text-color
+            text-decoration: none
+            border-radius: 6px
+            transition: all 0.3s ease
+
+            &:hover
+              background: rgba(108, 92, 231, 0.1)
+              color: $theme-color
+
+  // 右侧内容区
+  .story-content
+    flex: 1
+    background: rgba(255, 255, 255, 0.95)
+    border-radius: 15px
+    padding: 2rem
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+
+    .welcome-section
+      h1
+        font-size: 2rem
+        color: $text-color
+        margin-bottom: 1rem
+
+      p
+        color: #666
+        margin-bottom: 2rem
+
+      .latest-chapters
+        h2
+          font-size: 1.5rem
+          color: $text-color
+          margin-bottom: 1.5rem
+          padding-bottom: 0.5rem
+          border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+
+        .chapter-grid
+          display: grid
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+          gap: 1.5rem
+
+          .chapter-card
+            background: white
+            border-radius: 12px
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+            text-decoration: none
+            transition: all 0.3s ease
+            overflow: hidden
+
+            &:hover
+              transform: translateY(-3px)
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+
+            .card-content
+              padding: 1.5rem
+
+              h3
+                font-size: 1.2rem
+                color: $text-color
+                margin: 0 0 0.5rem
+
+              .book-name
+                color: $theme-color
+                font-size: 0.9rem
+                margin-bottom: 0.8rem
+
+              .meta
+                display: flex
+                justify-content: space-between
+                color: #666
+                font-size: 0.85rem
+                margin-bottom: 1rem
+
+              .description
+                color: #666
+                font-size: 0.9rem
+                margin: 0
+                display: -webkit-box
+                -webkit-line-clamp: 3
+                -webkit-box-orient: vertical
+                overflow: hidden
+
+    .chapter-view
+      .chapter-header
+        margin-bottom: 2rem
+        padding-bottom: 1rem
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+
+        h1
+          font-size: 2rem
+          color: $text-color
+          margin: 0 0 1rem
+
+        .chapter-meta
+          color: #666
+          font-size: 0.9rem
+
+          span
+            margin-right: 1rem
+
+            &:last-child
+              margin-right: 0
+
+      .chapter-content
+        line-height: 1.8
+        color: #333
+        font-size: 1.1rem
+
+        p
+          margin: 1.5rem 0
+          text-indent: 2em
+
+      .chapter-footer
+        margin-top: 3rem
+        padding-top: 1.5rem
+        border-top: 2px solid rgba(0, 0, 0, 0.1)
+
+        .chapter-nav
+          display: flex
+          justify-content: space-between
+
+          a
+            padding: 0.8rem 1.5rem
+            background: $theme-color
+            color: white
+            text-decoration: none
+            border-radius: 8px
+            transition: all 0.3s ease
+
+            &:hover
+              background: darken($theme-color, 10%)
+
+// Responsive styles for story page
+@media (max-width: 768px)
+  .story-page
+    padding-top: 60px
+    
+    .story-container
+      flex-direction: column
+      
+    .story-sidebar
+      flex: none
+      width: 100%
+      position: static
+      
+    .story-content
+      .chapter-grid
+        grid-template-columns: 1fr
+        
+      .chapter-view
+        .chapter-header
+          h1
+            font-size: 1.6rem
+            
+        .chapter-content
+          font-size: 1rem
+
+// ... rest of the existing code ... 

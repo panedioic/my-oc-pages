@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+    <%- partial('_partial/head') %>
+    <link rel="stylesheet" href="/css/transitions.css">
+</head>
+<body>
+    <div class="container">
+        <%- partial('_partial/header') %>
+        <main class="main">
+            <div class="wrapper">
+                <%- body %>
+                <% if (theme.sidebar.enable && page.type !== 'about') { %>
+                    <%- partial('_partial/sidebar') %>
+                <% } %>
+            </div>
+        </main>
+        <%- partial('_partial/footer') %>
+    </div>
+    <%- partial('_partial/scripts') %>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 为所有链接添加过渡动画
+        document.querySelectorAll('a').forEach(link => {
+            // 排除外部链接和锚点链接
+            if (link.getAttribute('href') && 
+                link.getAttribute('href').startsWith('/') && 
+                !link.getAttribute('href').startsWith('/#')) {
+                
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    // 获取主要内容容器
+                    const mainContent = document.querySelector('.main .wrapper') || 
+                                      document.querySelector('.story-content') ||
+                                      document.querySelector('.archive-content') ||
+                                      document.querySelector('.post-content') ||
+                                      document.querySelector('.page-content');
+                    
+                    if (!mainContent) return;
+                    
+                    // 添加离开动画
+                    mainContent.classList.add('page-leaving');
+                    document.body.classList.add('page-transitioning');
+                    
+                    // 等待动画完成后跳转
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 200);
+                });
+            }
+        });
+    });
+
+    // 处理浏览器的前进/后退
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            // 从缓存恢复时移除过渡类
+            document.body.classList.remove('page-transitioning');
+            const mainContent = document.querySelector('.main .wrapper') || 
+                              document.querySelector('.story-content') ||
+                              document.querySelector('.archive-content') ||
+                              document.querySelector('.post-content') ||
+                              document.querySelector('.page-content');
+            
+            if (mainContent) {
+                mainContent.classList.remove('page-leaving');
+            }
+        }
+    });
+    </script>
+</body>
+</html> 

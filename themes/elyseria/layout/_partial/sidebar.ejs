@@ -1,0 +1,9 @@
+<aside class="sidebar">
+    <div class="sidebar-inner">
+        <% if (is_post()) { %>
+            <div class="post-toc-wrap">
+                <%- toc(page.content, {list_number: false}) %>
+            </div>
+        <% } %>
+    </div>
+</aside> 

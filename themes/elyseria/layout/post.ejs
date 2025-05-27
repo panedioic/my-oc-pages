@@ -1,0 +1,49 @@
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title"><%- page.title %></h1>
+        <div class="post-meta">
+            <span class="post-time">
+                <i class="icon-calendar"></i>
+                <%- date(page.date, 'YYYY-MM-DD') %>
+            </span>
+            <% if (page.categories && page.categories.length) { %>
+                <span class="post-category">
+                    <i class="icon-folder"></i>
+                    <%- list_categories(page.categories, {
+                        show_count: false,
+                        class: 'post-category',
+                        style: 'none',
+                        separator: ' '
+                    }) %>
+                </span>
+            <% } %>
+            <% if (page.tags && page.tags.length) { %>
+                <span class="post-tag">
+                    <i class="icon-tag"></i>
+                    <%- list_tags(page.tags, {
+                        show_count: false,
+                        class: 'post-tag',
+                        style: 'none',
+                        separator: ' '
+                    }) %>
+                </span>
+            <% } %>
+        </div>
+    </header>
+    <div class="post-content">
+        <%- page.content %>
+    </div>
+    <% if (theme.post.copyright) { %>
+        <div class="post-copyright">
+            <p>本文作者：<%- config.author %></p>
+            <p>本文链接：<%- page.permalink %></p>
+            <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
+        </div>
+    <% } %>
+</article>
+
+<% if (theme.comments.enable) { %>
+    <div class="comments" id="comments">
+        <%- partial('_partial/comments') %>
+    </div>
+<% } %> 

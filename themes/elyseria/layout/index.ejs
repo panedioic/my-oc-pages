@@ -1,0 +1,85 @@
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="site-title"><%- config.title %></h1>
+        <p class="site-description"><%- config.description %></p>
+    </div>
+</div>
+
+<!-- Feature Cards -->
+<div class="feature-cards">
+    <div class="card-container">
+        <div class="feature-card" onclick="window.location.href='/archives'">
+            <div class="card-icon">📚</div>
+            <h3>文章归档</h3>
+            <p>浏览所有文章</p>
+        </div>
+        <div class="feature-card" onclick="window.location.href='/categories'">
+            <div class="card-icon">📂</div>
+            <h3>文章分类</h3>
+            <p>按分类浏览</p>
+        </div>
+        <div class="feature-card" onclick="window.location.href='/tags'">
+            <div class="card-icon">🏷️</div>
+            <h3>标签云</h3>
+            <p>按标签浏览</p>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Posts -->
+<div class="recent-posts">
+    <h2 class="section-title">最新文章</h2>
+    <div class="post-list">
+        <% page.posts.limit(6).each(function(post) { %>
+            <article class="post-item">
+                <h2 class="post-title">
+                    <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+                </h2>
+                <div class="post-meta">
+                    <span class="post-time">
+                        <%= date(post.date, 'YYYY-MM-DD') %>
+                    </span>
+                </div>
+                <div class="post-excerpt">
+                    <%- post.excerpt || strip_html(post.content).substring(0, theme.post.excerpt_length) %>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+</div>
+
+<div class="post-list">
+    <% page.posts.each(function(post) { %>
+        <article class="post-item">
+            <h2 class="post-title">
+                <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+            </h2>
+            <div class="post-meta">
+                <span class="post-time">
+                    <%= date(post.date, 'YYYY-MM-DD') %>
+                </span>
+                <% if (post.categories && post.categories.length) { %>
+                    <span class="post-category">
+                        <%- list_categories(post.categories, {
+                            show_count: false,
+                            class: 'post-category',
+                            style: 'none',
+                            separator: ' '
+                        }) %>
+                    </span>
+                <% } %>
+            </div>
+            <div class="post-excerpt">
+                <%- post.excerpt || strip_html(post.content).substring(0, theme.post.excerpt_length) %>
+            </div>
+            <div class="post-more">
+                <a href="<%- url_for(post.path) %>" class="read-more">
+                    <%= theme.post.read_more_text %>
+                </a>
+            </div>
+        </article>
+    <% }) %>
+</div>
+<%- partial('_partial/pagination') %> 

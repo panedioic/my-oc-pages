@@ -1,0 +1,74 @@
+# Theme Config
+
+# Header
+menu:
+  Home: /
+  Character: /character/
+  Story: /story/
+  Map: /map/
+  World: /world/
+  Factions: /faction/
+  Gallery: /gallery/
+  About: /about
+
+# Favicon
+favicon: /images/favicon.ico
+
+# Logo
+logo: /images/logo.png
+
+# Theme Color
+theme_color: "#6c5ce7"
+default_header_image: '/images/hero-bg.png'
+
+# Hero Section
+hero:
+  background_image: /images/hero-bg.png
+  title_color: "#ffffff"
+  desc_color: "#f1f1f1"
+
+# Social Links
+social:
+  Github: https://github.com/yourusername
+  Twitter: https://twitter.com/yourusername
+  Email: mailto:your@email.com
+
+# Sidebar
+sidebar:
+  enable: true
+  position: right # left or right
+
+# Post Settings
+post:
+  excerpt_length: 250
+  read_more_text: Read More
+  copyright: true
+  
+# Footer
+footer:
+  copyright:
+    enable: true
+    text: "All rights reserved."
+  powered:
+    enable: true
+  theme:
+    enable: true
+  beian:
+    enable: true
+    icp:
+      enable: true
+      number: "冀ICP备2025101912号"
+    gongan:
+      enable: true
+      number: "13108202001145"
+      province: "冀"
+      icon: "/images/beian.png"
+
+# Comments
+comments:
+  enable: false
+  type: disqus # disqus, gitalk, or other comment systems
+  
+# Analytics
+google_analytics: # UA-XXXXXXXX-X
+baidu_analytics: # your baidu analytics id 

@@ -1,0 +1,208 @@
+<%
+const stories = page.stories || [];
+%>
+<div class="story-page">
+    <div class="story-container">
+        <div class="story-sidebar">
+            <div class="book-list">
+                <% stories.forEach(function(book) { %>
+                    <div class="book-item">
+                        <div class="book-title <%= book.isOpen ? 'open' : '' %>" data-book-id="<%= book.id %>">
+                            <%= book.title %>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="chapter-list <%= book.isOpen ? 'show' : '' %>">
+                            <% book.chapters.forEach(function(chapter) { %>
+                                <a href="/<%= chapter.id %>" class="chapter-item">
+                                    <%= chapter.title %>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div class="story-content">
+            <% if (!page.is_chapter) { %>
+                <div class="welcome-section">
+                    <h1>欢迎来到故事集</h1>
+                    <p>这里收录了关于灵羽星奈和灵羽琉璃的所有故事。</p>
+                    <div class="latest-chapters">
+                        <h2>最新章节</h2>
+                        <div class="chapter-grid">
+                            <% 
+                            let latestChapters = [];
+                            stories.forEach(function(book) {
+                                book.chapters.forEach(function(chapter) {
+                                    latestChapters.push({
+                                        bookTitle: book.title,
+                                        ...chapter
+                                    });
+                                });
+                            });
+                            latestChapters.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+                            latestChapters.slice(0, 6).forEach(function(chapter) { 
+                            %>
+                                <a href="/<%= chapter.id %>" class="chapter-card">
+                                    <div class="card-content">
+                                        <h3><%= chapter.title %></h3>
+                                        <p class="book-name"><%= chapter.bookTitle %></p>
+                                        <p class="meta">
+                                            <span class="date"><%= chapter.publishDate %></span>
+                                            <span class="words"><%= chapter.wordCount %> 字</span>
+                                        </p>
+                                        <p class="description"><%= chapter.description %></p>
+                                    </div>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="chapter-view">
+                    <div class="chapter-header">
+                        <h1><%= page.current_chapter.title %></h1>
+                        <div class="chapter-meta">
+                            <span class="book-title"><%= page.current_chapter.bookTitle %></span>
+                            <span class="publish-date">发布于 <%= page.current_chapter.publishDate %></span>
+                            <span class="word-count"><%= page.current_chapter.wordCount %> 字</span>
+                        </div>
+                    </div>
+                    <div class="chapter-content">
+                        <%- page.current_chapter.content %>
+                    </div>
+                    <div class="chapter-footer">
+                        <div class="chapter-nav">
+                            <% if (!page.current_chapter.isFirstChapter) { %>
+                                <a href="/<%= page.current_chapter.prevChapter %>" class="prev-chapter">上一章</a>
+                            <% } else { %>
+                                <span class="prev-chapter disabled">上一章</span>
+                            <% } %>
+                            <% if (!page.current_chapter.isLastChapter) { %>
+                                <a href="/<%= page.current_chapter.nextChapter %>" class="next-chapter">下一章</a>
+                            <% } else { %>
+                                <span class="next-chapter disabled">下一章</span>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<style>
+/* 添加页面过渡动画相关样式 */
+.story-content {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 页面离开时的动画 */
+.page-leaving {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease-in-out;
+}
+
+.chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em 0;
+    gap: 1em;
+}
+
+.prev-chapter,
+.next-chapter {
+    padding: 0.8em 1.5em;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.prev-chapter:hover,
+.next-chapter:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.chapter-nav .disabled {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 1;
+    pointer-events: none;
+    border: 1px solid #e0e0e0;
+}
+
+.chapter-nav .disabled:hover {
+    background-color: #f0f0f0;
+    transform: none;
+    box-shadow: none;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookTitles = document.querySelectorAll('.book-title');
+    
+    // 原有的书籍标题点击事件处理
+    bookTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            const bookItem = this.closest('.book-item');
+            const chapterList = bookItem.querySelector('.chapter-list');
+            const isOpen = this.classList.contains('open');
+            
+            document.querySelectorAll('.book-title.open').forEach(openTitle => {
+                if (openTitle !== this) {
+                    openTitle.classList.remove('open');
+                    openTitle.nextElementSibling.classList.remove('show');
+                }
+            });
+            
+            this.classList.toggle('open');
+            chapterList.classList.toggle('show');
+        });
+    });
+
+    // 添加页面跳转动画处理
+    document.querySelectorAll('a').forEach(link => {
+        if (link.getAttribute('href')?.startsWith('/story/') || 
+            link.classList.contains('prev-chapter') || 
+            link.classList.contains('next-chapter')) {
+            
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const storyContent = document.querySelector('.story-content');
+                
+                // 添加离开动画
+                storyContent.classList.add('page-leaving');
+                
+                // 等待动画完成后跳转
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 300);
+            });
+        }
+    });
+});
+</script> 

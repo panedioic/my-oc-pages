@@ -1,0 +1,35 @@
+<%
+var currentYear = new Date().getFullYear();
+%>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="copyright">
+            <span>© <%= currentYear %></span>
+            <% if (theme.footer.copyright.enable) { %>
+                <span><%= theme.footer.copyright.text %></span>
+            <% } %>
+            <% if (theme.footer.powered.enable) { %>
+                <span>| Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span>
+            <% } %>
+            <% if (theme.footer.theme.enable) { %>
+                <span>| Theme <a href="https://github.com/yourusername/hexo-theme-elyseria" target="_blank">Elyseria</a></span>
+            <% } %>
+        </div>
+        <% if (theme.footer.beian && theme.footer.beian.enable) { %>
+            <div class="beian">
+                <% if (theme.footer.beian.icp && theme.footer.beian.icp.enable) { %>
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><%= theme.footer.beian.icp.number %></a>
+                <% } %>
+                <% if (theme.footer.beian.icp && theme.footer.beian.icp.enable && theme.footer.beian.gongan && theme.footer.beian.gongan.enable) { %>
+                    <span>|</span>
+                <% } %>
+                <% if (theme.footer.beian.gongan && theme.footer.beian.gongan.enable) { %>
+                    <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" rel="nofollow">
+                        <img src="<%= theme.footer.beian.gongan.icon %>" alt="公安备案图标">
+                        <%= theme.footer.beian.gongan.province %>公网安备<%= theme.footer.beian.gongan.number %>号
+                    </a>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+</footer> 

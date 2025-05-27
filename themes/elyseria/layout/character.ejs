@@ -1,0 +1,115 @@
+<div class="character-page">
+    <div class="character-container">
+        <!-- 左侧角色列表 -->
+        <div class="character-list">
+            <h2 class="list-title">角色列表</h2>
+            <ul class="character-nav">
+                <% site.pages.forEach(function(char) { %>
+                    <% if (char.type === 'character' && char.title !== '角色列表') { %>
+                        <li class="character-item <%= page.title === char.title ? 'active' : '' %>">
+                            <a href="<%- url_for(char.path) %>">
+                                <%= char.title %>
+                            </a>
+                        </li>
+                    <% } %>
+                <% }); %>
+            </ul>
+        </div>
+
+        <!-- 右侧角色信息 -->
+        <div class="character-content">
+            <% if (page.title === '角色列表') { %>
+                <div class="welcome-section">
+                    <h1>欢迎来到角色展示页面</h1>
+                    <p>请从左侧选择一个角色以查看详细信息。</p>
+                    <div class="character-grid">
+                        <% site.pages.forEach(function(char) { %>
+                            <% if (char.type === 'character' && char.title !== '角色列表') { %>
+                                <a href="<%- url_for(char.path) %>" class="character-card">
+                                    <div class="card-image">
+                                        <% if (char.image) { %>
+                                            <img src="<%- char.image %>" alt="<%- char.title %>">
+                                        <% } else { %>
+                                            <div class="image-placeholder">
+                                                <span>暂无立绘</span>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                    <h3><%= char.title %></h3>
+                                    <% if (char.profile) { %>
+                                        <p><%= char.profile.note %></p>
+                                    <% } %>
+                                </a>
+                            <% } %>
+                        <% }); %>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="character-header">
+                    <h1 class="character-title"><%= page.title %></h1>
+                </div>
+                
+                <div class="character-info">
+                    <!-- 角色立绘 -->
+                    <div class="character-image">
+                        <% if (page.image) { %>
+                            <img src="<%- page.image %>" alt="<%- page.title %>">
+                        <% } else { %>
+                            <div class="image-placeholder">
+                                <span>暂无立绘</span>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <!-- 角色属性 -->
+                    <div class="character-profile">
+                        <% if (page.profile) { %>
+                            <% for (let key in page.profile) { %>
+                                <div class="profile-item <%= key === 'note' ? 'note-item' : '' %>">
+                                    <span class="item-label"><%= key %></span>
+                                    <span class="item-value"><%= page.profile[key] %></span>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- 角色详细信息 -->
+                <div class="character-details">
+                    <%- page.content %>
+                </div>
+
+                <!-- 人际关系 -->
+                <% if (page.relations && page.relations.length > 0) { %>
+                    <div class="character-relations">
+                        <h2>人际关系</h2>
+                        <div class="relation-cards">
+                            <% page.relations.forEach(function(relation) { %>
+                                <a href="<%- relation.link %>" class="relation-card">
+                                    <h3><%= relation.name %></h3>
+                                    <div class="relation-role"><%= relation.role %></div>
+                                    <p><%= relation.description %></p>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+
+                <!-- 关联故事 -->
+                <% if (page.stories && page.stories.length > 0) { %>
+                    <div class="character-stories">
+                        <h2>关联故事</h2>
+                        <div class="story-cards">
+                            <% page.stories.forEach(function(story) { %>
+                                <a href="<%- story.link %>" class="story-card">
+                                    <h3><%= story.title %></h3>
+                                    <p><%= story.description %></p>
+                                </a>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</div> 

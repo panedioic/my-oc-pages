@@ -1,0 +1,22 @@
+{
+  "name": "hexo-theme-elyseria",
+  "version": "1.0.0",
+  "description": "A elegant and modern theme for Hexo",
+  "main": "package.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "elyseria",
+    "elegant",
+    "modern"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-stylus": "^3.0.0"
+  }
+} 

@@ -1,0 +1,10 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= page.title ? `${page.title} | ${config.title}` : config.title %></title>
+<% if (theme.favicon) { %>
+    <link rel="shortcut icon" href="<%- theme.favicon %>">
+<% } %>
+<link rel="stylesheet" href="/css/style.css">
+<%- css('css/world') %>
+<%- js('js/script') %>
+<!-- 添加其他需要的meta标签和CSS文件 --> 
