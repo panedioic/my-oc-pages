@@ -4,7 +4,7 @@ date: 2025-05-25
 type: about
 layout: page
 comments: false
-header_image: /images/about-bg.jpg
+header_image: /images/about-bg.png
 ---
 
 # 你好！
