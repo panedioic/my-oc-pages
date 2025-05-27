@@ -1,0 +1,135 @@
+<%- partial('_partial/header') %>
+
+<div class="error-page">
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-title">页面不见了</div>
+        <div class="error-desc">看起来这里什么都没有，可能是迷失在了位面裂缝中...</div>
+        <div class="error-actions">
+            <a href="/" class="home-link">返回主页</a>
+            <button onclick="window.history.back()" class="back-link">返回上页</button>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf2 100%);
+}
+
+.error-container {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: 800;
+    color: #2c3e50;
+    line-height: 1;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.error-title {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.error-desc {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.error-actions a,
+.error-actions button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.home-link {
+    background: #3498db;
+    color: white;
+    border: none;
+}
+
+.home-link:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.back-link {
+    background: transparent;
+    color: #666;
+    border: 2px solid #ddd;
+}
+
+.back-link:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 100px;
+    }
+
+    .error-title {
+        font-size: 28px;
+    }
+
+    .error-desc {
+        font-size: 16px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .error-actions a,
+    .error-actions button {
+        width: 100%;
+    }
+}
+</style> 
